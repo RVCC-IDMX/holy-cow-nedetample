@@ -70,3 +70,72 @@ test('multiple lines - wrap to max lenght', (t) => {
 		' ------',
 	].join('\n'), balloon.think('ONE\nTWO THREE', 4));
 });
+
+// Basic emoji wrap
+test('emoji - wrap 8', (t) => {
+    t.plan(1);
+    t.equal([
+        ' __________',
+        '/ 🙂🙂🙂🙂 \\',
+        '| 🙂🙂🙂🙂 |',
+        '| 🙂🙂🙂🙂 |',
+        '| 🙂🙂🙂🙂 |',
+        '\\ 🙂🙂🙂🙂 /',
+        ' ----------',
+    ].join('\n'), balloon.say('🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂', 8));
+});
+
+// Mixed ASCII and emoji
+test('mixed ascii and emoji - wrap 10', (t) => {
+    t.plan(1);
+    t.equal([
+        ' ____________',
+        '/ Hello 🙂🙂 \\',
+        '| 🙂🙂🙂🙂🙂 |',
+        '\\ 🙂🙂🙂!    /',
+        ' ------------',
+    ].join('\n'), balloon.say('Hello 🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂!', 10));
+});
+
+// CJK characters
+test('CJK - wrap 6', (t) => {
+    t.plan(1);
+    t.equal([
+        ' ________',
+        '/ 你好， \\',
+        '| 世界！ |',
+        '| 这是一 |',
+        '| 个测试 |',
+        '\\ 。     /',
+        ' --------',
+    ].join('\n'), balloon.say('你好，世界！这是一个测试。', 6));
+});
+
+// Mixed CJK and emoji
+test('mixed CJK and emoji - wrap 8', (t) => {
+    t.plan(1);
+    t.equal([
+        ' __________',
+        '/ 你好🙂🙂 \\',
+        '| 🙂🙂世界 |',
+        '\\ 🙂🙂🙂🙂 /',
+        ' ----------',
+    ].join('\n'), balloon.say('你好🙂🙂🙂🙂世界🙂🙂🙂🙂', 8));
+});
+
+// Single wide emoji per line
+test('single wide emoji per line - wrap 2', (t) => {
+    t.plan(1);
+    t.equal([
+        ' ____',
+        '/ 🙂 \\',
+        '| 🙂 |',
+        '| 🙂 |',
+        '| 🙂 |',
+        '| 🙂 |',
+        '| 🙂 |',
+        '| 🙂 |',
+        '\\ 🙂 /',
+        ' ----',
+    ].join('\n'), balloon.say('🙂🙂🙂🙂🙂🙂🙂🙂', 2));
+});
